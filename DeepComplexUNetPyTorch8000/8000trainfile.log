@@ -1,0 +1,512 @@
+nohup: ignoring input
+PinkBlack :: args : {'gpu': 0, 'batch_size': 12, 'train_signal': '/home/azureuser/env/utils/complex2/clean/', 'train_noise': '/home/azureuser/env/utils/complex2/noise/', 'test_signal': '/home/azureuser/env/utils/complex2/valclean', 'test_noise': '/home/azureuser/env/utils/complex2/valnoise/', 'sequence_length': 16384, 'num_step': 10000, 'validation_interval': 500, 'num_workers': 0, 'ckpt': 'unet/ckpt.pth', 'model_complexity': 45, 'lr': 0.01, 'num_signal': 0, 'num_noise': 0, 'optimizer': 'adam', 'lr_decay': 0.5, 'momentum': 0, 'multi_gpu': False, 'complex': True, 'model_depth': 20, 'swa': False, 'loss': 'wsdr', 'log_amp': False, 'metric': 'pesq', 'train_dataset': 'se', 'valid_dataset': 'se', 'preload': False, 'padding_mode': 'reflect'}
+Got 13845 signals and 13845 mixtures.
+Got 1541 signals and 1541 mixtures.
+SourceSeparator(
+  (net): Sequential(
+    (0): STFT(
+      (stft): STFT(fft_length=1024, hop_length=256, win_length=None)(center=True, pad_mode=reflect, normalized=False, onesided=True)
+      (amp2db): AmplitudeToDb(ref=1.0, amin=1e-07)
+    )
+    (1): UNet(
+      (encoder0): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(1, 31, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+          (conv_im): Conv2d(1, 31, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder1): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(31, 31, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+          (conv_im): Conv2d(31, 31, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder2): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(31, 62, kernel_size=(6, 4), stride=(2, 2), padding=[2, 1])
+          (conv_im): Conv2d(31, 62, kernel_size=(6, 4), stride=(2, 2), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder3): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 62, kernel_size=(7, 5), stride=(2, 1), padding=[3, 2])
+          (conv_im): Conv2d(62, 62, kernel_size=(7, 5), stride=(2, 1), padding=[3, 2])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder4): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+          (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder5): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+          (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder6): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+          (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder7): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+          (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder8): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+          (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (encoder9): Encoder(
+        (conv): ComplexConv2d(
+          (conv_re): Conv2d(62, 128, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+          (conv_im): Conv2d(62, 128, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder0): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(128, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+          (tconv_im): ConvTranspose2d(128, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder1): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder2): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder3): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder4): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder5): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder6): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(6, 3), stride=(2, 1), padding=(2, 1))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(6, 3), stride=(2, 1), padding=(2, 1))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder7): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(124, 62, kernel_size=(7, 5), stride=(2, 2), padding=(2, 1))
+          (tconv_im): ConvTranspose2d(124, 62, kernel_size=(7, 5), stride=(2, 2), padding=(2, 1))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder8): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(93, 62, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+          (tconv_im): ConvTranspose2d(93, 62, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (decoder9): Decoder(
+        (transconv): ComplexConvTranspose2d(
+          (tconv_re): ConvTranspose2d(93, 62, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+          (tconv_im): ConvTranspose2d(93, 62, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+        )
+        (bn): ComplexBatchNorm2d(
+          (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (relu): LeakyReLU(negative_slope=0.01, inplace)
+      )
+      (linear): ComplexConv2d(
+        (conv_re): Conv2d(62, 1, kernel_size=(1, 1), stride=(1, 1))
+        (conv_im): Conv2d(62, 1, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (decoders): ModuleList(
+        (0): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(128, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+            (tconv_im): ConvTranspose2d(128, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (1): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (2): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (3): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (4): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 3), stride=(2, 1), padding=(1, 1))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (5): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(4, 2), stride=(2, 2), padding=(1, 0))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (6): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(6, 3), stride=(2, 1), padding=(2, 1))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(6, 3), stride=(2, 1), padding=(2, 1))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (7): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(124, 62, kernel_size=(7, 5), stride=(2, 2), padding=(2, 1))
+            (tconv_im): ConvTranspose2d(124, 62, kernel_size=(7, 5), stride=(2, 2), padding=(2, 1))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (8): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(93, 62, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+            (tconv_im): ConvTranspose2d(93, 62, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (9): Decoder(
+          (transconv): ComplexConvTranspose2d(
+            (tconv_re): ConvTranspose2d(93, 62, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+            (tconv_im): ConvTranspose2d(93, 62, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+      )
+      (encoders): ModuleList(
+        (0): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(1, 31, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+            (conv_im): Conv2d(1, 31, kernel_size=(7, 1), stride=(1, 1), padding=(3, 0))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (1): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(31, 31, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+            (conv_im): Conv2d(31, 31, kernel_size=(1, 7), stride=(1, 1), padding=(0, 3))
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(31, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (2): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(31, 62, kernel_size=(6, 4), stride=(2, 2), padding=[2, 1])
+            (conv_im): Conv2d(31, 62, kernel_size=(6, 4), stride=(2, 2), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (3): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 62, kernel_size=(7, 5), stride=(2, 1), padding=[3, 2])
+            (conv_im): Conv2d(62, 62, kernel_size=(7, 5), stride=(2, 1), padding=[3, 2])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (4): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+            (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (5): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+            (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (6): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+            (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (7): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+            (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (8): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+            (conv_im): Conv2d(62, 62, kernel_size=(5, 3), stride=(2, 2), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(62, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+        (9): Encoder(
+          (conv): ComplexConv2d(
+            (conv_re): Conv2d(62, 128, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+            (conv_im): Conv2d(62, 128, kernel_size=(5, 3), stride=(2, 1), padding=[2, 1])
+          )
+          (bn): ComplexBatchNorm2d(
+            (bn_re): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn_im): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          )
+          (relu): LeakyReLU(negative_slope=0.01, inplace)
+        )
+      )
+    )
+    (2): ApplyMask(
+      (amp2db): DbToAmplitude(ref=1.0)
+    )
+    (3): ISTFT(
+      (amp2db): DbToAmplitude(ref=1.0)
+    )
+  )
+)
+|---------|---------|---------|---------|---------|---------|---------|
+|   step  |train_loss|train_metric| val_loss|val_metric|    lr   |   time  |
+|---------|---------|---------|---------|---------|---------|---------|
+/home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/numba/core/errors.py:149: UserWarning: Insufficiently recent colorama version found. Numba requires colorama >= 0.3.9
+  warnings.warn(msg)
+  0%|          | 0/500 [00:00<?, ?it/s]                                       Traceback (Most recent call last):
+156 train_dcunet.py                                                                                <module>    --> trainer.train(step=args.num_step, validation_interval=args.validation_interval)                       
+219 /home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/PinkBlack/trainer.py           train       --> self.config[f'{phase}_loss'], self.config[f'{phase}_metric'] = self._train(phase, num_steps=num_steps)
+331 /home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/PinkBlack/trainer.py           _train      --> results = self._step(phase=phase, iterator=step_iterator)                                             
+264 /home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/PinkBlack/trainer.py           _step       --> batch_dict = next(iterator)                                                                           
+560 /home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/torch/utils/data/dataloader.py __next__    --> batch = self.collate_fn([self.dataset[i] for i in indices])                                           
+560 /home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/torch/utils/data/dataloader.py <listcomp>  --> batch = self.collate_fn([self.dataset[i] for i in indices])                                           
+57  /home/azureuser/env/DeepComplexUNetPyTorch8000/DCUNet/sedataset.py                             __getitem__ --> x = load_audio(self.mixtures[idx], SAMPLE_RATE, assert_sr=True, channel=1)['audio']                   
+56  /home/azureuser/env/DeepComplexUNetPyTorch8000/DCUNet/utils.py                                 load_audio  --> assert sr == sample_rate                                                                              
+AssertionError: 
+> /home/azureuser/env/DeepComplexUNetPyTorch8000/DCUNet/utils.py(56)load_audio()
+-> assert sr == sample_rate
+(Pdb) Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/pdb.py", line 321, in _cmdloop
+    self.cmdloop()
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/cmd.py", line 126, in cmdloop
+    line = input(self.prompt)
+OSError: [Errno 9] Bad file descriptor
+
+Original exception was:
+Traceback (most recent call last):
+  File "train_dcunet.py", line 156, in <module>
+    trainer.train(step=args.num_step, validation_interval=args.validation_interval)
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/PinkBlack/trainer.py", line 219, in train
+    self.config[f'{phase}_loss'], self.config[f'{phase}_metric'] = self._train(phase, num_steps=num_steps)
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/PinkBlack/trainer.py", line 331, in _train
+    results = self._step(phase=phase, iterator=step_iterator)
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/PinkBlack/trainer.py", line 264, in _step
+    batch_dict = next(iterator)
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/torch/utils/data/dataloader.py", line 560, in __next__
+    batch = self.collate_fn([self.dataset[i] for i in indices])
+  File "/home/azureuser/anaconda3/envs/coco/lib/python3.6/site-packages/torch/utils/data/dataloader.py", line 560, in <listcomp>
+    batch = self.collate_fn([self.dataset[i] for i in indices])
+  File "/home/azureuser/env/DeepComplexUNetPyTorch8000/DCUNet/sedataset.py", line 57, in __getitem__
+    x = load_audio(self.mixtures[idx], SAMPLE_RATE, assert_sr=True, channel=1)['audio']
+  File "/home/azureuser/env/DeepComplexUNetPyTorch8000/DCUNet/utils.py", line 56, in load_audio
+    assert sr == sample_rate
+AssertionError
